@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Acanlar Mobilya — Plaka Kesim V2</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#eef1f4;color:#18212b;font-family:Arial,Helvetica,sans-serif}
+header{background:#0d1117;color:#fff;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand svg{height:52px;width:auto;display:block}
+.brand h1{margin:0;font-size:21px;letter-spacing:0.5px;color:#fff}
+.brand .author{font-size:14px;color:#38bdf8;font-weight:bold;margin-top:2px}
+.brand small{opacity:.65;color:#ccc}
+
+.btn-pdf {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+.btn-pdf:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.45);
+}
+
+main{max-width:1450px;margin:20px auto;padding:0 14px}
+.layout{display:grid;grid-template-columns:390px 1fr;gap:18px}
+.card{background:#fff;border-radius:14px;padding:17px;box-shadow:0 3px 15px #0000000b;margin-bottom:16px}
+h2{font-size:16px;margin:0 0 12px}.muted{font-size:12px;color:#66717d}
+label{font-size:12px;font-weight:700;display:block;margin:9px 0 5px}
+input,select,button{font:inherit}
+input[type=text],input[type=number],select{width:100%;border:1px solid #ccd3da;border-radius:8px;padding:8px;background:#fff}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+button{border:0;border-radius:9px;padding:10px 13px;cursor:pointer;font-weight:700;background:#111827;color:#fff}
+button.secondary{background:#e8edf1;color:#17202a}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.table-wrap{overflow:auto;border:1px solid #e3e7eb;border-radius:9px}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:650px}
+th,td{padding:7px;border-bottom:1px solid #edf0f2;text-align:center;white-space:nowrap}
+th{background:#f7f9fa;font-size:11px}td:first-child,th:first-child{text-align:left}
+
+.metrics{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px}
+.metric{background:#f7f9fa;border-radius:10px;padding:10px 14px;min-width:115px}
+.metric b{font-size:19px;display:block}.metric span{font-size:10px;color:#68727d}
+.plan{border:1px solid #dce2e7;border-radius:12px;padding:12px;margin-bottom:14px;background:#fff}
+.plan h3{margin:0 0 8px;font-size:15px}
+canvas{width:100%;height:auto;display:block;border:1px solid #d9dee3;border-radius:8px;background:#fff}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;margin:8px 0}.legend span{display:inline-flex;align-items:center;gap:4px}
+.dot{width:14px;height:8px;border:2px solid #111;display:inline-block}
+.band-note{font-size:11px;color:#4b5563;margin-top:8px}
+.notice{background:#fff7df;border:1px solid #f0d98c;border-radius:9px;padding:9px;font-size:11px;margin-top:10px}
+.file{padding:7px;border:1px dashed #b8c1ca;border-radius:8px;width:100%;background:#fafbfc}
+
+footer {text-align: center; padding: 20px 0; color: #66717d; font-size: 13px; border-top: 1px solid #e3e7eb; margin-top: 20px;}
+
+.print-header {display: none;}
+
+@media(max-width:950px){.layout{grid-template-columns:1fr}}
+
+/* --- DİKEY (PORTRAIT) BASKI STİLLERİ --- */
+@media print{
+  @page { 
+    size: A4 portrait; 
+    margin: 8mm; 
+  }
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    font-family: Arial, sans-serif !important;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  header, .no-print, .layout > section:first-child, .notice, footer, .legend { 
+    display: none !important; 
+  }
+  main { 
+    max-width: 100% !important; 
+    margin: 0 !important; 
+    padding: 0 !important; 
+  }
+  .layout { 
+    display: block !important; 
+  }
+  .card { 
+    box-shadow: none !important; 
+    border: 0 !important; 
+    padding: 0 !important; 
+    margin: 0 !important; 
+  }
+  
+  .print-header {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #000;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .print-header .brand-print {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .print-header svg {
+    height: 40px;
+    width: auto;
+  }
+  .print-header h1 {
+    margin: 0;
+    font-size: 19px;
+    color: #000;
+  }
+  .print-header .author {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+  }
+  .print-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .print-info b { font-size: 13px; color: #000; }
+
+  .plan { 
+    break-inside: avoid; 
+    page-break-after: always; 
+    border: 0 !important; 
+    padding: 0 !important; 
+    margin-bottom: 0 !important; 
+  }
+  .plan:last-child {
+    page-break-after: auto;
+  }
+  .plan h3 { 
+    font-size: 14px; 
+    margin: 0 0 6px 0; 
+    text-align: center;
+  }
+  .plan canvas { 
+    border: 2px solid #000 !important; 
+    width: 100% !important; 
+    max-height: 78vh !important;
+    object-fit: contain;
+  }
+  .metrics { 
+    justify-content: center !important;
+    margin-bottom: 8px !important; 
+    gap: 10px !important;
+  }
+  .metric { 
+    border: 1px solid #000 !important; 
+    padding: 4px 12px !important; 
+    background: #fff !important;
+    min-width: 90px !important;
+    text-align: center;
+  }
+  .metric b { font-size: 14px !important; color: #000 !important; }
+  .metric span { color: #333 !important; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 230,135 L 330,335 L 205,335 L 180,285 L 210,225 Z" fill="#D32F2F"/>
+      <path d="M 40,335 L 180,55 L 320,335 L 285,335 L 180,125 L 75,335 Z" fill="#D32F2F"/>
+      <path d="M 310,135 L 410,335 L 375,335 L 310,205 L 280,265 L 260,225 Z" fill="#2C3E50"/>
+      <path d="M 120,335 L 180,215 L 240,335 L 205,335 L 180,285 L 155,335 Z" fill="#2C3E50"/>
+    </svg>
+    <div>
+      <h1>ACANLAR MOBİLYA</h1>
+      <div class="author">Mesut ACAN</div>
+      <small>Plaka Kesim & Optimizasyon — V2</small>
+    </div>
+  </div>
+  <div class="no-print">
+    <button class="btn-pdf" onclick="window.print()">🖨️ PDF YAZDIR / İNDİR</button>
+  </div>
+</header>
+
+<main>
+<div class="layout">
+<section>
+<div class="card">
+<h2>1. Plaka ve Proje Ayarları</h2>
+<div>
+  <label>Müşteri / Proje Adı (Çıktıda Görünür)</label>
+  <input id="projName" type="text" placeholder="Örn: Mutfak Dolabı Kesim Listesi">
+</div>
+<div class="row">
+<div><label>En (mm)</label><input id="sw" type="number" value="2100"></div>
+<div><label>Boy (mm)</label><input id="sh" type="number" value="2800"></div>
+</div>
+<div class="row">
+<div><label>Bıçak payı / Kerf (mm)</label><input id="kerf" type="number" step=".1" value="4"></div>
+<div><label>Kenar fire (mm)</label><input id="edge" type="number" value="10"></div>
+</div>
+<label>Genel İlk Kesim Yönü Tercihi</label>
+<select id="globalDir">
+<option value="boyuna" selected>Boyuna (Dikey İlk Kesim)</option>
+<option value="enine">Enine (Yatay İlk Kesim)</option>
+<option value="otomatik">Otomatik (En Az Fire)</option>
+</select>
+</div>
+
+<div class="card">
+<h2>2. Parça Listesi</h2>
+<div class="table-wrap">
+<table>
+<thead>
+  <tr>
+    <th>Parça Adı / No</th>
+    <th>Boy</th>
+    <th>En</th>
+    <th>Adet</th>
+    <th>Döndür</th>
+    <th colspan="4">Kenar Bandı (Ü/A/S/İ)</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody id="parts"></tbody>
+</table>
+</div>
+<div class="actions">
+<button class="secondary" onclick="addPart()">+ Satır Ekle</button>
+<button class="secondary" onclick="downloadTemplate()">⬇ Örnek Şablon İndir</button>
+<label class="file" style="display:inline-block;font-weight:700;cursor:pointer">
+📥 Dosya Yükle
+<input id="upload" type="file" accept=".csv,.txt" style="display:none" onchange="loadFile(event)">
+</label>
+</div>
+</div>
+
+<div class="card">
+<h2>3. CSV / Metin İle Toplu Veri</h2>
+<div class="muted">Format: Parça, Boy, En, Adet, Döndür(1/0), Ü, A, S, İ</div>
+<textarea id="csv" rows="4" style="width:100%;margin-top:8px;border:1px solid #ccd3da;border-radius:8px;padding:9px" placeholder="1,720,580,4,1,1,1,0,0"></textarea>
+<div class="actions">
+  <button class="secondary" onclick="importCSV()">Metinden Aktar</button>
+  <button onclick="optimize()" style="background:#059669">🚀 OPTİMİZE ET</button>
+</div>
+</div>
+</section>
+
+<section>
+<div class="print-header">
+  <div class="brand-print">
+    <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 230,135 L 330,335 L 205,335 L 180,285 L 210,225 Z" fill="#D32F2F"/>
+      <path d="M 40,335 L 180,55 L 320,335 L 285,335 L 180,125 L 75,335 Z" fill="#D32F2F"/>
+      <path d="M 310,135 L 410,335 L 375,335 L 310,205 L 280,265 L 260,225 Z" fill="#2C3E50"/>
+      <path d="M 120,335 L 180,215 L 240,335 L 205,335 L 180,285 L 155,335 Z" fill="#2C3E50"/>
+    </svg>
+    <div>
+      <h1>ACANLAR MOBİLYA</h1>
+      <div class="author">Mesut ACAN</div>
+    </div>
+  </div>
+  <div class="print-info">
+    <div id="printProjName"><b>Proje:</b> -</div>
+    <div id="printDate"><b>Tarih:</b> </div>
+  </div>
+</div>
+
+<div class="card">
+<h2 class="no-print">Kesim Haritası ve Detaylar</h2>
+<div class="metrics">
+<div class="metric"><b id="sheetCount">0</b><span>PLAKA</span></div>
+<div class="metric"><b id="used">0%</b><span>DOLULUK</span></div>
+<div class="metric"><b id="waste">0%</b><span>FİRE</span></div>
+<div class="metric"><b id="pieceCount">0</b><span>TOPLAM PARÇA</span></div>
+</div>
+<div class="legend no-print">
+<span><i class="dot"></i> Parça</span>
+<span style="color:#d32f2f">--- Ana Giyotin Kesim</span>
+<span style="color:#0284c7">--- Şerit İçi Kesim</span>
+<span>Ü/A/S/İ = Üst / Alt / Sağ / Sol Kenar Bandı</span>
+</div>
+<div id="plans"></div>
+<div class="notice no-print">Çıktı alındığında kesim şablonları net okunacak boyutta basılır. Kırmızı kırık çizgiler ana kesim yollarını gösterir.</div>
+</div>
+</section>
+</div>
+</main>
+
+<footer class="no-print">
+  Acanlar Mobilya — Mesut ACAN | Plaka Optimizasyon & Kesim Modülü
+</footer>
+
+<script>
+let parts = [];
+
+function addPart(p) {
+  if(!p) {
+    p = {
+      name: String(parts.length + 1),
+      h: "",
+      w: "",
+      q: 1,
+      rot: true,
+      u: false,
+      a: false,
+      s: false,
+      i: false
+    };
+  }
+  parts.push({...p, id: Date.now() + Math.random()});
+  renderParts();
+  
+  setTimeout(()=>{
+    let rows = document.querySelectorAll("#parts tr");
+    let lastInput = rows[rows.length-1]?.querySelector("input[data-k='name']");
+    if(lastInput) {
+      lastInput.focus();
+      lastInput.select(); // Yeni satırda parça adı varsayılan olarak tamamen seçili gelir
+    }
+  }, 30);
+}
+
+function renderParts() {
+  const tb = document.getElementById("parts");
+  tb.innerHTML = "";
+  parts.forEach((p, i) => {
+    tb.innerHTML += `<tr>
+    <td><input type="text" value="${esc(p.name)}" placeholder="Parça No" data-i="${i}" data-k="name"></td>
+    <td><input type="number" value="${p.h || ''}" placeholder="Boy" data-i="${i}" data-k="h"></td>
+    <td><input type="number" value="${p.w || ''}" placeholder="En" data-i="${i}" data-k="w"></td>
+    <td><input type="number" min="1" value="${p.q || 1}" data-i="${i}" data-k="q"></td>
+    <td><input type="checkbox" ${p.rot ? "checked" : ""} data-i="${i}" data-k="rot"></td>
+    <td><input type="checkbox" ${p.u ? "checked" : ""} data-i="${i}" data-k="u" title="Üst"></td>
+    <td><input type="checkbox" ${p.a ? "checked" : ""} data-i="${i}" data-k="a" title="Alt"></td>
+    <td><input type="checkbox" ${p.s ? "checked" : ""} data-i="${i}" data-k="s" title="Sağ"></td>
+    <td><input type="checkbox" ${p.i ? "checked" : ""} data-i="${i}" data-k="i" title="İç/Sol"></td>
+    <td><button class="secondary" onclick="parts.splice(${i},1);renderParts()">×</button></td>
+    </tr>`;
+  });
+
+  tb.querySelectorAll("input").forEach(el => {
+    el.addEventListener("change", () => {
+      let i = +el.dataset.i, k = el.dataset.k;
+      parts[i][k] = el.type === "checkbox" ? el.checked : (["w","h","q"].includes(k) ? (el.value ? +el.value : "") : el.value);
+    });
+    el.addEventListener("keydown", e => {
+      if(e.key === "Enter") { 
+        e.preventDefault(); 
+        addPart(); 
+      }
+    });
+  });
+}
+
+function esc(s) { return String(s ?? "").replace(/"/g, "&quot;").replace(/</g, "&lt;"); }
+
+function downloadTemplate() {
+  const sample = [
+    "Parça,Boy,En,Adet,Döndürülebilir,Üst,Alt,Sağ,Sol",
+    "1,720,580,4,1,1,1,0,0",
+    "2,700,560,4,1,0,0,1,1",
+    "3,300,550,8,1,0,0,0,0",
+    "4,716,596,2,0,1,1,1,1"
+  ].join("\r\n");
+
+  const blob = new Blob(["\ufeff" + sample], {type: "text/csv;charset=utf-8"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "Acanlar_Ornek_Kesim_Listesi.csv";
+  a.click();
+}
+
+function loadFile(ev) {
+  const f = ev.target.files[0];
+  if(!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    document.getElementById("csv").value = r.result;
+    importCSV();
+  };
+  r.readAsText(f, "UTF-8");
+}
+
+function parseLine(line) {
+  let a = line.includes(";") ? line.split(";") : line.split(",");
+  return a.map(x => x.trim().replace(/^"|"$/g, ""));
+}
+
+function importCSV() {
+  const text = document.getElementById("csv").value.trim();
+  if(!text) return;
+  let lines = text.split(/\r?\n/).filter(Boolean), arr = [];
+  lines.forEach((line, idx) => {
+    let a = parseLine(line);
+    if(idx === 0 && /parça|boy|en/i.test(a[0])) return;
+    if(a.length >= 4 && !isNaN(+a[1])) {
+      arr.push({
+        name: a[0],
+        h: +a[1],
+        w: +a[2],
+        q: +a[3] || 1,
+        rot: a[4] !== "0",
+        u: a[5] === "1",
+        a: a[6] === "1",
+        s: a[7] === "1",
+        i: a[8] === "1"
+      });
+    }
+  });
+  if(arr.length > 0) {
+    parts = arr;
+    renderParts();
+    optimize();
+  }
+}
+
+function expand() {
+  let a = [];
+  parts.forEach(p => {
+    if(p.w && p.h) {
+      for(let n = 0; n < (p.q || 1); n++) a.push({...p});
+    }
+  });
+  return a;
+}
+
+/* OPTİMİZE EDİLMİŞ BÜYÜK BOYUTLU VE NET ÇIZIM ALGORİTMASI */
+function optimize() {
+  const SW0 = +document.getElementById("sw").value, SH0 = +document.getElementById("sh").value;
+  const edge = +document.getElementById("edge").value, K = +document.getElementById("kerf").value;
+  const SW = SW0 - 2 * edge, SH = SH0 - 2 * edge;
+  const globalDir = document.getElementById("globalDir").value;
+
+  const proj = document.getElementById("projName").value || "Plaka Kesim Projesi";
+  document.getElementById("printProjName").innerHTML = `<b>Proje:</b> ${esc(proj)}`;
+  document.getElementById("printDate").innerHTML = `<b>Tarih:</b> ${new Date().toLocaleDateString('tr-TR')}`;
+
+  let items = expand().sort((a,b) => (b.w * b.h) - (a.w * a.h));
+  let sheets = [];
+
+  for(const item of items) {
+    let placed = false;
+
+    for(let s of sheets) {
+      if(tryPlaceInSheet(s, item, SW, SH, K, globalDir)) {
+        placed = true;
+        break;
+      }
+    }
+
+    if(!placed) {
+      let newSheet = { 
+        freeRects: [{ x: 0, y: 0, w: SW, h: SH }], 
+        placed: [],
+        cuts: []
+      };
+      if(tryPlaceInSheet(newSheet, item, SW, SH, K, globalDir)) {
+        sheets.push(newSheet);
+      }
+    }
+  }
+
+  drawPlans(sheets, SW, SH, SW0, SH0, edge, K);
+}
+
+function tryPlaceInSheet(sheet, item, SW, SH, K, globalDir) {
+  let bestIdx = -1;
+  let bestRot = false;
+  let bestScore = Infinity;
+
+  for(let i = 0; i < sheet.freeRects.length; i++) {
+    let r = sheet.freeRects[i];
+
+    let options = [
+      { w: item.w, h: item.h, rot: false },
+      { w: item.h, h: item.w, rot: true }
+    ];
+
+    for(let opt of options) {
+      if(opt.rot && !item.rot) continue;
+
+      if(globalDir === "boyuna" && opt.h < opt.w && item.rot) continue;
+      if(globalDir === "enine" && opt.w < opt.h && item.rot) continue;
+
+      if(opt.w <= r.w && opt.h <= r.h) {
+        let leftoverX = r.w - opt.w;
+        let leftoverY = r.h - opt.h;
+        let score = Math.min(leftoverX, leftoverY);
+
+        if(score < bestScore) {
+          bestScore = score;
+          bestIdx = i;
+          bestRot = opt.rot;
+        }
+      }
+    }
+  }
+
+  if(bestIdx !== -1) {
+    let r = sheet.freeRects[bestIdx];
+    let pw = bestRot ? item.h : item.w;
+    let ph = bestRot ? item.w : item.h;
+
+    sheet.placed.push({
+      ...item,
+      x: r.x,
+      y: r.y,
+      w: pw,
+      h: ph,
+      rot: bestRot,
+      cutDir: globalDir
+    });
+
+    sheet.freeRects.splice(bestIdx, 1);
+
+    if(globalDir === "enine") {
+      if(r.w - pw > 0) sheet.freeRects.push({ x: r.x + pw + K, y: r.y, w: r.w - pw - K, h: ph });
+      if(r.h - ph > 0) sheet.freeRects.push({ x: r.x, y: r.y + ph + K, w: r.w, h: r.h - ph - K });
+      sheet.cuts.push({ x1: r.x, y1: r.y + ph, x2: r.x + r.w, y2: r.y + ph, type: "main" });
+      if(r.w - pw > 0) sheet.cuts.push({ x1: r.x + pw, y1: r.y, x2: r.x + pw, y2: r.y + ph, type: "sub" });
+    } else {
+      if(r.h - ph > 0) sheet.freeRects.push({ x: r.x, y: r.y + ph + K, w: pw, h: r.h - ph - K });
+      if(r.w - pw > 0) sheet.freeRects.push({ x: r.x + pw + K, y: r.y, w: r.w - pw - K, h: r.h });
+      sheet.cuts.push({ x1: r.x + pw, y1: r.y, x2: r.x + pw, y2: r.y + r.h, type: "main" });
+      if(r.h - ph > 0) sheet.cuts.push({ x1: r.x, y1: r.y + ph, x2: r.x + pw, y2: r.y + ph, type: "sub" });
+    }
+
+    sheet.freeRects = sheet.freeRects.filter(fr => fr.w > 5 && fr.h > 5);
+    return true;
+  }
+
+  return false;
+}
+
+function drawPlans(sheets, SW, SH, SW0, SH0, edge, K) {
+  let totalArea = 0, count = 0;
+  sheets.forEach(s => s.placed.forEach(p => { totalArea += p.w * p.h; count++; }));
+  
+  document.getElementById("sheetCount").textContent = sheets.length;
+  document.getElementById("pieceCount").textContent = count;
+  let cap = SW * SH * sheets.length, pct = cap ? Math.round(totalArea / cap * 100) : 0;
+  document.getElementById("used").textContent = pct + "%";
+  document.getElementById("waste").textContent = (100 - pct) + "%";
+
+  const box = document.getElementById("plans");
+  box.innerHTML = "";
+
+  sheets.forEach((s, si) => {
+    let div = document.createElement("div");
+    div.className = "plan";
+    div.innerHTML = `<h3>PLAKA ${si + 1} — ${SW0} × ${SH0} mm</h3>`;
+    let c = document.createElement("canvas");
+    c.width = 1400;
+    c.height = Math.round(1400 * SH0 / SW0);
+    div.appendChild(c);
+    box.appendChild(div);
+
+    let ctx = c.getContext("2d"), sx = (c.width - 36) / SW0, sy = (c.height - 36) / SH0, OX = 18, OY = 18;
+    
+    // Plaka Dış Çerçevesi
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#111";
+    ctx.strokeRect(OX, OY, SW0 * sx, SH0 * sy);
+
+    // Kenar Fire Çizgisi
+    ctx.setLineDash([6, 4]);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "#888";
+    ctx.strokeRect(OX + edge * sx, OY + edge * sy, SW * sx, SH * sy);
+    ctx.setLineDash([]);
+
+    // Kesim Kılavuz Çizgileri
+    s.cuts.forEach(ct => {
+      ctx.beginPath();
+      ctx.setLineDash(ct.type === "main" ? [10, 5] : [4, 4]);
+      ctx.lineWidth = ct.type === "main" ? 2.5 : 1.5;
+      ctx.strokeStyle = ct.type === "main" ? "#d32f2f" : "#0284c7";
+      ctx.moveTo(OX + (edge + ct.x1) * sx, OY + (edge + ct.y1) * sy);
+      ctx.lineTo(OX + (edge + ct.x2) * sx, OY + (edge + ct.y2) * sy);
+      ctx.stroke();
+    });
+    ctx.setLineDash([]);
+
+    // Parçalar
+    s.placed.forEach((p, idx) => {
+      let x = OX + (edge + p.x) * sx, y = OY + (edge + p.y) * sy, w = p.w * sx, h = p.h * sy;
+      
+      ctx.fillStyle = "#f8fafc";
+      ctx.fillRect(x, y, w, h);
+
+      ctx.strokeStyle = "#0f172a";
+      ctx.lineWidth = 2.5;
+      ctx.strokeRect(x, y, w, h);
+
+      // Kenar Bantları
+      ctx.font = "bold 16px Arial";
+      ctx.fillStyle = "#d97706";
+      if(p.u) { ctx.lineWidth = 6; ctx.strokeStyle="#d97706"; ctx.beginPath(); ctx.moveTo(x, y + 2); ctx.lineTo(x + w, y + 2); ctx.stroke(); ctx.fillText("Ü", x + 8, y + 18); }
+      if(p.a) { ctx.lineWidth = 6; ctx.strokeStyle="#d97706"; ctx.beginPath(); ctx.moveTo(x, y + h - 2); ctx.lineTo(x + w, y + h - 2); ctx.stroke(); ctx.fillText("A", x + 8, y + h - 6); }
+      if(p.s) { ctx.lineWidth = 6; ctx.strokeStyle="#d97706"; ctx.beginPath(); ctx.moveTo(x + w - 2, y); ctx.lineTo(x + w - 2, y + h); ctx.stroke(); ctx.fillText("S", x + w - 18, y + 18); }
+      if(p.i) { ctx.lineWidth = 6; ctx.strokeStyle="#d97706"; ctx.beginPath(); ctx.moveTo(x + 2, y); ctx.lineTo(x + 2, y + h); ctx.stroke(); ctx.fillText("İ", x + 8, y + 18); }
+
+      // Belirgin ve Büyük Ölçü Yazımı
+      let fs = Math.max(18, Math.min(36, Math.min(w, h) / 4.2));
+      
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      
+      // Ölçü (Boy x En)
+      ctx.font = `bold ${fs}px Arial`;
+      ctx.fillStyle = "#000000";
+      ctx.fillText(`${p.h} × ${p.w}`, x + w / 2, y + h / 2 - 8);
+      
+      // Parça İsmi / No
+      ctx.font = `bold ${Math.max(14, fs - 8)}px Arial`;
+      ctx.fillStyle = "#1e293b";
+      ctx.fillText(`${p.name}`, x + w / 2, y + h / 2 + fs / 1.1);
+
+      // Kesim Sırası Rozeti
+      ctx.beginPath();
+      ctx.arc(x + 20, y + 20, 14, 0, Math.PI * 2);
+      ctx.fillStyle = "#0f172a";
+      ctx.fill();
+      ctx.fillStyle = "#ffffff";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.font = "bold 12px Arial";
+      ctx.fillText(idx + 1, x + 20, y + 20);
+
+      ctx.textAlign = "left";
+      ctx.textBaseline = "alphabetic";
+    });
+
+    let note = document.createElement("div");
+    note.className = "band-note no-print";
+    note.textContent = "Bant işareti: Ü=üst, A=alt, S=sağ, İ=sol. Kırmızı kırık çizgiler ilk giyotin kesim yollarıdır.";
+    div.appendChild(note);
+  });
+}
+
+// Başlangıçta 1 adet boş satır açılır
+addPart();
+</script>
+</body>
+</html>
