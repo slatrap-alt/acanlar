@@ -18,7 +18,7 @@
 body { margin: 0; background: var(--bg); font-family: 'Segoe UI', system-ui, Arial, sans-serif; color: #1e293b; }
 button, input, select, textarea { font: inherit; }
 
-/* HEADER LOGOLU ALAN */
+/* HEADER */
 .header { background: linear-gradient(135deg, #181d27, #2c3545); color: white; padding: 12px 16px; box-shadow: 0 4px 20px #0002; }
 .header-inner { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: center; gap: 14px; }
 .logo-box { width: 60px; height: 60px; background: #fff; border-radius: 10px; padding: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -29,6 +29,11 @@ button, input, select, textarea { font: inherit; }
 .wrap { max-width: 1200px; margin: 16px auto; padding: 0 12px; display: flex; flex-direction: column; gap: 14px; }
 .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; box-shadow: 0 2px 12px #00000008; }
 .card h2 { margin: 0 0 14px; font-size: 16px; display: flex; align-items: center; justify-content: space-between; color: var(--dark); border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; }
+
+/* SEKME / TAB TASARIMI */
+.tab-container { display: flex; gap: 8px; margin-bottom: 14px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+.tab-btn { flex: 1; padding: 12px 14px; border-radius: 10px; border: 1px solid #cbd5e1; background: #fff; font-weight: 800; font-size: 14px; color: var(--muted); cursor: pointer; text-align: center; transition: 0.2s; }
+.tab-btn.active { background: var(--dark); color: #fff; border-color: var(--dark); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
 
 /* FORM FIELDS & MOBİL UYUM */
 .fields { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
@@ -44,13 +49,18 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
 /* DONANIM KARTLARI */
 .feature-group { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: #f8fafc; padding: 10px; border-radius: 10px; border: 1px solid #e2e8f0; }
 
-/* COUNTER (1'ER 1'ER ARTTIRMA BUTONLARI) */
+/* COUNTER */
 .counter-box { display: flex; align-items: center; gap: 4px; margin-top: 2px; }
 .btn-counter { width: 34px; height: 34px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; font-size: 16px; font-weight: 800; color: var(--dark); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; user-select: none; }
 .btn-counter:active { background: #e2e8f0; transform: scale(0.96); }
 .counter-val { flex: 1; text-align: center; font-size: 14px; font-weight: 800; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 0; background: #fff; }
 
-.btn { border: 0; border-radius: 8px; padding: 8px 14px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; transition: 0.15s; white-space: nowrap; }
+/* CANLI ÖNİZLEME KART TASARIMI */
+.live-preview-box { background: linear-gradient(135deg, #0f172a, #1e293b); color: #fff; padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+.live-preview-box label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; }
+.live-preview-box .price { font-size: 22px; font-weight: 900; color: #4ade80; }
+
+.btn { border: 0; border-radius: 8px; padding: 10px 16px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 13px; transition: 0.15s; white-space: nowrap; }
 .btn-primary { background: var(--red); color: #fff; }
 .btn-primary:hover { background: #990000; }
 .btn-dark { background: var(--dark); color: #fff; }
@@ -60,7 +70,7 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
 
 .actions { display: flex; gap: 10px; align-items: center; width: 100%; }
 
-/* MÜŞTERİ PANELİ (SÜRGÜLÜ DRAWER) */
+/* MÜŞTERİ PANELİ (DRAWER) */
 .panel-drawer { position: fixed; left: 0; bottom: 0; width: 100%; background: #fff; border-top-left-radius: 16px; border-top-right-radius: 16px; box-shadow: 0 -10px 40px #0003; z-index: 1002; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); padding: 16px; max-height: 85vh; overflow-y: auto; }
 .panel-drawer.open { transform: translateY(0); }
 .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1001; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
@@ -142,7 +152,7 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
 </head>
 <body>
 
-<!-- HEADER (LOGOLU) -->
+<!-- HEADER -->
 <header class="header no-print">
   <div class="header-inner">
     <div class="logo-box">
@@ -168,22 +178,48 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
     </div>
   </section>
 
-  <!-- 1. MOBİLYA BİLGİLERİ -->
+  <!-- 1. MODÜL SEÇİMİ VE BİLGİ GİRİŞ FORMU -->
   <section class="card no-print">
-    <div class="item-head">
-      <h2 style="border:none; padding:0; margin:0;">📐 Mobilya Kalemleri</h2>
-      <button class="btn btn-primary" onclick="addItem()">＋ Kalem Ekle</button>
+    <h2>📐 Hesaplama Modülü Seçimi</h2>
+
+    <!-- SEKMELER -->
+    <div class="tab-container">
+      <button class="tab-btn active" id="tab-wardrobe" onclick="switchTab('wardrobe')">🚪 Gardırop / Vestiyer Modülü</button>
+      <button class="tab-btn" id="tab-kitchen" onclick="switchTab('kitchen')">🍳 Mutfak Dolabı Modülü</button>
     </div>
-    <div id="items"></div>
+
+    <!-- ANLIK DEĞİŞEN VERİ GİRİŞ FORMU -->
+    <div id="activeFormBox" style="background:#f8fafc; padding:14px; border-radius:12px; border:1px solid #cbd5e1;">
+      <!-- JS Tarafından Doldurulacak -->
+    </div>
+
+    <!-- ANLIK FİYAT ÖNİZLEME KARTI -->
+    <div class="live-preview-box">
+      <div>
+        <label>Anlık Kalem Tutarı</label>
+        <div style="font-size:11px; color:#cbd5e1;" id="liveMetrajText">Ölçü Bekleniyor...</div>
+      </div>
+      <div class="price" id="livePreviewPrice">0 TL</div>
+    </div>
+
+    <div style="margin-top:12px; text-align:right;">
+      <button class="btn btn-primary" style="width:100%; padding:12px; font-size:14px;" onclick="addCurrentItemToList()">＋ Bu Kalemi Listeye Ekle</button>
+    </div>
   </section>
 
-  <!-- 2. HESAPLANAN FİYAT DETAYLARI -->
+  <!-- 2. GİRİŞİ YAPILAN KALEMLER LİSTESİ -->
+  <section class="card no-print">
+    <h2>📋 Girişi Yapılan Mobilya Kalemleri</h2>
+    <div id="itemsList"></div>
+  </section>
+
+  <!-- 3. HESAPLANAN FİYAT DETAYLARI -->
   <section class="card no-print">
     <h2 style="border:none; padding:0; margin:0 0 12px 0;">💰 Fiyat Teklifi Özeti</h2>
     <div class="summary-grid">
       <div class="summary-card">
-        <label>Toplam Alan</label>
-        <div class="val" id="totalArea">0,00 m²</div>
+        <label>Toplam Metraj / Alan</label>
+        <div class="val" id="totalArea">0,00 m² / mt</div>
       </div>
       <div class="summary-card">
         <label>Malzeme Tutarı</label>
@@ -217,7 +253,7 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
     </div>
   </section>
 
-  <!-- 3. A4 YAZDIRILABİLİR MÜŞTERİ TEKLİF FORMU (LOGOLU) -->
+  <!-- 4. A4 YAZDIRILABİLİR MÜŞTERİ TEKLİF FORMU -->
   <section class="card quote-print-form" id="printSection">
     <div class="pf-header">
       <div class="pf-brand-group">
@@ -250,9 +286,9 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
           <th style="width:5%">#</th>
           <th style="width:25%">Mobilya Kalemi</th>
           <th style="width:15%">Malzeme</th>
-          <th style="width:15%">Ölçü (En×Boy)</th>
-          <th style="width:8%">Adet</th>
-          <th style="width:17%">Ekstra Özellikler</th>
+          <th style="width:18%">Ölçü / Uzunluk</th>
+          <th style="width:7%">Adet</th>
+          <th style="width:15%">Ekstra Özellikler</th>
           <th style="width:15%;text-align:right">Tutar</th>
         </tr>
       </thead>
@@ -272,7 +308,7 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
         </ul>
       </div>
       <div class="pf-totals">
-        <div class="pf-totals-row"><span>Toplam İmalat Alanı:</span><span id="pfArea">0 m²</span></div>
+        <div class="pf-totals-row"><span>Toplam İmalat / Metraj:</span><span id="pfArea">0 m²</span></div>
         <div class="pf-totals-row"><span>Net Malzeme Tutar:</span><span id="pfMatTotal">0 TL</span></div>
         <div class="pf-totals-row"><span>Donanım Ekstraları:</span><span id="pfExtraTotal">0 TL</span></div>
         <div class="pf-totals-row grand"><span>GENEL TOPLAM:</span><span id="pfGrandTotal">0 TL</span></div>
@@ -339,151 +375,263 @@ const DEFAULT_SETTINGS = { drawerPrice: 2000, slidingPrice: 7500, glassPrice: 15
 
 let prices = JSON.parse(localStorage.getItem("acanlar_prices") || "null") || {...DEFAULT_PRICES};
 let settings = JSON.parse(localStorage.getItem("acanlar_settings") || "null") || {...DEFAULT_SETTINGS};
-let itemCount = 0;
+let itemsList = []; 
+let currentTab = "wardrobe"; 
 
 function money(n) {
   return new Intl.NumberFormat("tr-TR", { style: "currency", currency: "TRY", maximumFractionDigits: 0 }).format(n || 0);
 }
 
-// MOBİLYA KALEMİ EKLEME
-function addItem(data = {}) {
-  itemCount++;
-  const id = itemCount;
-  const el = document.createElement("div");
-  el.className = "item-box";
-  el.id = "item-" + id;
-  const options = Object.keys(prices).map(p => `<option value="${p}" ${(data.material || "Suntalam") === p ? "selected" : ""}>${p}</option>`).join("");
+// SEKME DEĞİŞTİRME FONKSİYONU
+function switchTab(type) {
+  currentTab = type;
+  document.getElementById("tab-wardrobe").classList.toggle("active", type === "wardrobe");
+  document.getElementById("tab-kitchen").classList.toggle("active", type === "kitchen");
+  renderActiveForm();
+}
 
-  el.innerHTML = `
-    <div class="item-head">
-      <div class="item-no">📦 Mobilya Kalemi #${id}</div>
-      <button class="btn btn-danger no-print" onclick="removeItem(${id})">Sil</button>
-    </div>
-    <div class="fields">
-      <div class="field"><label>Mobilya Tanımı</label><input class="iname" placeholder="Örn: Gardırop, Portmanto" value="${data.name || ""}" oninput="calculate()"></div>
-      <div class="field"><label>Malzeme Türü</label><select class="material" onchange="calculate()">${options}</select></div>
-      <div class="field"><label>En (cm)</label><input class="width" type="number" min="0" step="0.1" value="${data.width || ""}" placeholder="200" oninput="calculate()"></div>
-      <div class="field"><label>Boy (cm)</label><input class="height" type="number" min="0" step="0.1" value="${data.height || ""}" placeholder="250" oninput="calculate()"></div>
-      <div class="field"><label>Adet</label><input class="qty" type="number" min="1" step="1" value="${data.qty || 1}" oninput="calculate()"></div>
+// ANLIK VERİ GİRİŞ FORMUNU OLUŞTURUR
+function renderActiveForm() {
+  const container = document.getElementById("activeFormBox");
+  const options = Object.keys(prices).map(p => `<option value="${p}">${p}</option>`).join("");
 
-      <div class="feature-group">
-        <div class="field" style="margin:0">
-          <label>🗄️ Çekmece (${money(settings.drawerPrice)}/ad)</label>
-          <div class="counter-box">
-            <button class="btn-counter" onclick="changeCounter(${id}, 'drawers', -1)">−</button>
-            <div class="counter-val" id="drawers-val-${id}">0</div>
-            <button class="btn-counter" onclick="changeCounter(${id}, 'drawers', 1)">＋</button>
+  if (currentTab === "kitchen") {
+    container.innerHTML = `
+      <div class="fields">
+        <div class="field"><label>Mutfak Modül Tanımı</label><input id="inp_name" placeholder="Örn: Mutfak Dolabı, Ada Mutfak" value="Mutfak Dolabı" oninput="calcLivePreview()"></div>
+        <div class="field"><label>Malzeme Türü</label><select id="inp_material" onchange="calcLivePreview()">${options}</select></div>
+        <div class="field"><label>Alt Tezgah (cm)</label><input id="inp_lower" type="number" min="0" placeholder="Örn: 350" oninput="calcLivePreview()"></div>
+        <div class="field"><label>Üst Tezgah (cm)</label><input id="inp_upper" type="number" min="0" placeholder="Örn: 320" oninput="calcLivePreview()"></div>
+      </div>
+    `;
+  } else {
+    container.innerHTML = `
+      <div class="fields">
+        <div class="field"><label>Mobilya Tanımı</label><input id="inp_name" placeholder="Örn: Gardırop, Portmanto" value="Gardırop" oninput="calcLivePreview()"></div>
+        <div class="field"><label>Malzeme Türü</label><select id="inp_material" onchange="calcLivePreview()">${options}</select></div>
+        <div class="field"><label>En (cm)</label><input id="inp_width" type="number" min="0" placeholder="Örn: 200" oninput="calcLivePreview()"></div>
+        <div class="field"><label>Boy (cm)</label><input id="inp_height" type="number" min="0" placeholder="Örn: 250" oninput="calcLivePreview()"></div>
+        <div class="field"><label>Adet</label><input id="inp_qty" type="number" min="1" value="1" oninput="calcLivePreview()"></div>
+
+        <div class="feature-group">
+          <div class="field" style="margin:0">
+            <label>🗄️ Çekmece (${money(settings.drawerPrice)}/ad)</label>
+            <div class="counter-box">
+              <button class="btn-counter" onclick="adjustFormCounter('inp_drawers', -1)">−</button>
+              <div class="counter-val" id="val_drawers">0</div>
+              <button class="btn-counter" onclick="adjustFormCounter('inp_drawers', 1)">＋</button>
+            </div>
+            <input type="hidden" id="inp_drawers" value="0">
           </div>
-          <input type="hidden" class="drawers" value="${data.drawers || 0}">
-        </div>
 
-        <div class="field" style="margin:0">
-          <label>🪞 Cam/Ayna (${money(settings.glassPrice)}/ad)</label>
-          <div class="counter-box">
-            <button class="btn-counter" onclick="changeCounter(${id}, 'glass', -1)">−</button>
-            <div class="counter-val" id="glass-val-${id}">0</div>
-            <button class="btn-counter" onclick="changeCounter(${id}, 'glass', 1)">＋</button>
+          <div class="field" style="margin:0">
+            <label>🪞 Cam/Ayna (${money(settings.glassPrice)}/ad)</label>
+            <div class="counter-box">
+              <button class="btn-counter" onclick="adjustFormCounter('inp_glass', -1)">−</button>
+              <div class="counter-val" id="val_glass">0</div>
+              <button class="btn-counter" onclick="adjustFormCounter('inp_glass', 1)">＋</button>
+            </div>
+            <input type="hidden" id="inp_glass" value="0">
           </div>
-          <input type="hidden" class="glass" value="${data.glass || 0}">
-        </div>
 
-        <div class="field" style="margin:0">
-          <label>🚪 Sürgü Kapak (${money(settings.slidingPrice)}/ad)</label>
-          <div class="counter-box">
-            <button class="btn-counter" onclick="changeCounter(${id}, 'sliding', -1)">−</button>
-            <div class="counter-val" id="sliding-val-${id}">0</div>
-            <button class="btn-counter" onclick="changeCounter(${id}, 'sliding', 1)">＋</button>
+          <div class="field" style="margin:0">
+            <label>🚪 Sürgü Kapak (${money(settings.slidingPrice)}/ad)</label>
+            <div class="counter-box">
+              <button class="btn-counter" onclick="adjustFormCounter('inp_sliding', -1)">−</button>
+              <div class="counter-val" id="val_sliding">0</div>
+              <button class="btn-counter" onclick="adjustFormCounter('inp_sliding', 1)">＋</button>
+            </div>
+            <input type="hidden" id="inp_sliding" value="0">
           </div>
-          <input type="hidden" class="sliding" value="${data.sliding || 0}">
         </div>
       </div>
-
-      <div class="field" style="grid-column: 1 / -1;"><label>Kalem Toplam Tutarı</label><input class="result" style="font-weight:800;color:var(--red);font-size:15px" readonly value="0 TL"></div>
-    </div>`;
-
-  document.getElementById("items").appendChild(el);
-  calculate();
+    `;
+  }
+  calcLivePreview();
 }
 
-function changeCounter(id, type, delta) {
-  const item = document.getElementById("item-" + id);
-  if (!item) return;
-  const input = item.querySelector("." + type);
-  const valDisplay = item.querySelector(`#${type}-val-${id}`);
-  let current = parseInt(input.value) || 0;
+function adjustFormCounter(fieldId, delta) {
+  const inp = document.getElementById(fieldId);
+  const valDisplay = document.getElementById("val_" + fieldId.replace("inp_", ""));
+  let current = parseInt(inp.value) || 0;
   current = Math.max(0, current + delta);
-  input.value = current;
+  inp.value = current;
   valDisplay.textContent = current;
-  calculate();
+  calcLivePreview();
 }
 
-function removeItem(id) {
-  document.getElementById("item-" + id)?.remove();
-  calculate();
-}
+// ⚡ ANLIK DOKUNMADAN HESAPLAYAN ÖNİZLEME MOTORU
+function calcLivePreview() {
+  const mat = document.getElementById("inp_material")?.value || "Suntalam";
+  const unitPrice = prices[mat] || 0;
+  let total = 0;
+  let text = "Ölçü Bekleniyor...";
 
-// MÜŞTERİ PANELİNİ AÇ / KAPAT
-function toggleCustomerPanel(open) {
-  document.getElementById("customerPanel").classList.toggle("open", open);
-  document.getElementById("overlay").classList.toggle("open", open);
-}
+  if (currentTab === "kitchen") {
+    const lowerCm = parseFloat(document.getElementById("inp_lower")?.value) || 0;
+    const upperCm = parseFloat(document.getElementById("inp_upper")?.value) || 0;
+    const totalM = (lowerCm + upperCm) / 100;
+    total = totalM * unitPrice;
+    if (totalM > 0) text = `Toplam Metraj: ${totalM.toFixed(2)} mt (${unitPrice.toLocaleString('tr-TR')} TL/m²)`;
+  } else {
+    const w = parseFloat(document.getElementById("inp_width")?.value) || 0;
+    const h = parseFloat(document.getElementById("inp_height")?.value) || 0;
+    const q = Math.max(1, parseInt(document.getElementById("inp_qty")?.value) || 1);
+    const drawers = parseInt(document.getElementById("inp_drawers")?.value) || 0;
+    const glass = parseInt(document.getElementById("inp_glass")?.value) || 0;
+    const sliding = parseInt(document.getElementById("inp_sliding")?.value) || 0;
 
-function updateCustomerSummary() {
-  const name = document.getElementById("custName").value.trim();
-  const project = document.getElementById("custProject").value.trim();
-  const txt = name ? `${name} ${project ? ' (' + project + ')' : ''}` : "Henüz müşteri bilgisi girilmedi (Opsiyonel)";
-  document.getElementById("customerSummaryText").textContent = txt;
-}
-
-// HESAPLAMA MOTORU
-function calculate() {
-  let area = 0, materialTotal = 0, drawerTotalSum = 0, slidingTotalSum = 0, glassTotalSum = 0;
-  const printItems = [];
-
-  document.querySelectorAll(".item-box").forEach((el, i) => {
-    const name = el.querySelector(".iname").value || ("Mobilya Kalemi " + (i + 1));
-    const mat = el.querySelector(".material").value;
-    const w = parseFloat(el.querySelector(".width").value) || 0;
-    const h = parseFloat(el.querySelector(".height").value) || 0;
-    const q = Math.max(1, parseInt(el.querySelector(".qty").value) || 1);
-    const drawers = Math.max(0, parseInt(el.querySelector(".drawers").value) || 0);
-    const glass = Math.max(0, parseInt(el.querySelector(".glass").value) || 0);
-    const sliding = Math.max(0, parseInt(el.querySelector(".sliding").value) || 0);
-
-    const itemArea = (w * h / 10000) * q;
-    const matSubtotal = itemArea * (prices[mat] || 0);
+    const area = (w * h / 10000) * q;
+    const matSubtotal = area * unitPrice;
     const drawerSubtotal = drawers * (settings.drawerPrice || 0);
     const glassSubtotal = glass * (settings.glassPrice || 0);
     const slidingSubtotal = sliding * (settings.slidingPrice || 0);
 
+    total = matSubtotal + drawerSubtotal + glassSubtotal + slidingSubtotal;
+    if (area > 0) text = `Alan: ${area.toFixed(2)} m² | Ekstralar Dahil`;
+  }
+
+  document.getElementById("liveMetrajText").textContent = text;
+  document.getElementById("livePreviewPrice").textContent = money(total);
+}
+
+// SEÇİLİ FORMDAN KALEMİ LİSTEYE EKLEME
+function addCurrentItemToList() {
+  const name = document.getElementById("inp_name").value.trim() || (currentTab === "kitchen" ? "Mutfak Dolabı" : "Gardırop");
+  const material = document.getElementById("inp_material").value;
+
+  let item = {
+    id: Date.now(),
+    type: currentTab,
+    name: name,
+    material: material
+  };
+
+  if (currentTab === "kitchen") {
+    const lowerCm = parseFloat(document.getElementById("inp_lower").value) || 0;
+    const upperCm = parseFloat(document.getElementById("inp_upper").value) || 0;
+
+    if (lowerCm <= 0 && upperCm <= 0) {
+      alert("Lütfen en az bir tezgah uzunluğu (cm) giriniz.");
+      return;
+    }
+
+    item.lowerCm = lowerCm;
+    item.upperCm = upperCm;
+  } else {
+    const w = parseFloat(document.getElementById("inp_width").value) || 0;
+    const h = parseFloat(document.getElementById("inp_height").value) || 0;
+    const q = Math.max(1, parseInt(document.getElementById("inp_qty").value) || 1);
+
+    if (w <= 0 || h <= 0) {
+      alert("Lütfen geçerli En ve Boy ölçüleri (cm) giriniz.");
+      return;
+    }
+
+    item.w = w;
+    item.h = h;
+    item.qty = q;
+    item.drawers = parseInt(document.getElementById("inp_drawers").value) || 0;
+    item.glass = parseInt(document.getElementById("inp_glass").value) || 0;
+    item.sliding = parseInt(document.getElementById("inp_sliding").value) || 0;
+  }
+
+  itemsList.push(item);
+  renderActiveForm(); // Formu sıfırla
+  calculateAndRender();
+}
+
+function removeItem(id) {
+  itemsList = itemsList.filter(x => x.id !== id);
+  calculateAndRender();
+}
+
+// ANA HESAPLAMA VE LİSTE YAZDIRMA ENGINE
+function calculateAndRender() {
+  const listContainer = document.getElementById("itemsList");
+  listContainer.innerHTML = "";
+
+  let areaSum = 0, materialTotalSum = 0, drawerTotalSum = 0, slidingTotalSum = 0, glassTotalSum = 0;
+  const printItems = [];
+
+  if (itemsList.length === 0) {
+    listContainer.innerHTML = `<p style="text-align:center; color:var(--muted); font-size:13px; padding:10px;">Henüz hiç mobilya kalemi eklenmedi.</p>`;
+  }
+
+  itemsList.forEach((x, idx) => {
+    let itemArea = 0, matSubtotal = 0, drawerSubtotal = 0, glassSubtotal = 0, slidingSubtotal = 0;
+    let dimensionText = "", qtyText = "";
+
+    if (x.type === "kitchen") {
+      const lowerM = x.lowerCm / 100;
+      const upperM = x.upperCm / 100;
+      itemArea = lowerM + upperM; 
+      matSubtotal = itemArea * (prices[x.material] || 0);
+
+      dimensionText = `Alt: ${x.lowerCm} cm / Üst: ${x.upperCm} cm`;
+      qtyText = `${itemArea.toFixed(2)} mt`;
+    } else {
+      itemArea = (x.w * x.h / 10000) * x.qty;
+      matSubtotal = itemArea * (prices[x.material] || 0);
+      drawerSubtotal = x.drawers * (settings.drawerPrice || 0);
+      glassSubtotal = x.glass * (settings.glassPrice || 0);
+      slidingSubtotal = x.sliding * (settings.slidingPrice || 0);
+
+      dimensionText = `${x.w}×${x.h} cm`;
+      qtyText = `${x.qty} ad.`;
+    }
+
     const finalItemTotal = matSubtotal + drawerSubtotal + glassSubtotal + slidingSubtotal;
 
-    area += itemArea;
-    materialTotal += matSubtotal;
+    areaSum += itemArea;
+    materialTotalSum += matSubtotal;
     drawerTotalSum += drawerSubtotal;
     glassTotalSum += glassSubtotal;
     slidingTotalSum += slidingSubtotal;
 
-    el.querySelector(".result").value = money(finalItemTotal);
+    let extrasInfo = [];
+    if (x.drawers > 0) extrasInfo.push(`${x.drawers} Çekmece`);
+    if (x.glass > 0) extrasInfo.push(`${x.glass} Cam/Ayna`);
+    if (x.sliding > 0) extrasInfo.push(`${x.sliding} Sürgü Kapak`);
+
+    const el = document.createElement("div");
+    el.className = "item-box";
+    el.innerHTML = `
+      <div class="item-head">
+        <div class="item-no">${x.type === 'kitchen' ? '🍳 Mutfak' : '🚪 Gardırop/Vestiyer'} #${idx + 1}: ${x.name}</div>
+        <button class="btn btn-danger no-print" onclick="removeItem(${x.id})">Sil</button>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; font-size:13px;">
+        <div><strong>Malzeme:</strong> ${x.material} | <strong>Ölçü:</strong> ${dimensionText} (${qtyText})</div>
+        ${extrasInfo.length > 0 ? `<div style="color:var(--muted)"><strong>Donanım:</strong> ${extrasInfo.join(", ")}</div>` : ''}
+        <div style="font-weight:800; color:var(--red); font-size:15px;">${money(finalItemTotal)}</div>
+      </div>
+    `;
+    listContainer.appendChild(el);
 
     printItems.push({
-      id: i + 1, name, mat, w, h, q, itemArea,
-      drawers, glass, sliding,
-      matSubtotal, drawerSubtotal, glassSubtotal, slidingSubtotal,
+      id: idx + 1,
+      name: x.name,
+      mat: x.material,
+      dimensionText,
+      qtyText,
+      drawers: x.drawers || 0,
+      glass: x.glass || 0,
+      sliding: x.sliding || 0,
       finalItemTotal
     });
   });
 
-  const grandTotal = materialTotal + drawerTotalSum + slidingTotalSum + glassTotalSum;
+  const grandTotal = materialTotalSum + drawerTotalSum + slidingTotalSum + glassTotalSum;
 
-  document.getElementById("totalArea").textContent = area.toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " m²";
-  document.getElementById("totalMaterial").textContent = money(materialTotal);
+  document.getElementById("totalArea").textContent = areaSum.toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " m² / mt";
+  document.getElementById("totalMaterial").textContent = money(materialTotalSum);
   document.getElementById("totalDrawers").textContent = money(drawerTotalSum);
   document.getElementById("totalSliding").textContent = money(slidingTotalSum);
   document.getElementById("totalGlass").textContent = money(glassTotalSum);
   document.getElementById("grandTotal").textContent = money(grandTotal);
 
-  updatePrintTable(printItems, area, materialTotal, (drawerTotalSum + slidingTotalSum + glassTotalSum), grandTotal);
+  updatePrintTable(printItems, areaSum, materialTotalSum, (drawerTotalSum + slidingTotalSum + glassTotalSum), grandTotal);
 }
 
 function updatePrintTable(items, area, matTotal, extraTotal, grandTotal) {
@@ -499,14 +647,14 @@ function updatePrintTable(items, area, matTotal, extraTotal, grandTotal) {
         <td>${x.id}</td>
         <td><strong>${x.name}</strong></td>
         <td>${x.mat}</td>
-        <td>${x.w}×${x.h} cm</td>
-        <td>${x.q} ad.</td>
+        <td>${x.dimensionText}</td>
+        <td>${x.qtyText}</td>
         <td>${extras.length > 0 ? extras.join(", ") : "-"}</td>
         <td style="text-align:right;font-weight:700">${money(x.finalItemTotal)}</td>
       </tr>`;
   }).join("");
 
-  document.getElementById("pfArea").textContent = area.toFixed(2) + " m²";
+  document.getElementById("pfArea").textContent = area.toFixed(2) + " m² / mt";
   document.getElementById("pfMatTotal").textContent = money(matTotal);
   document.getElementById("pfExtraTotal").textContent = money(extraTotal);
   document.getElementById("pfGrandTotal").textContent = money(grandTotal);
@@ -521,8 +669,20 @@ function updatePrintTable(items, area, matTotal, extraTotal, grandTotal) {
   document.getElementById("pfNo").textContent = Math.floor(1000 + Math.random() * 9000);
 }
 
+function toggleCustomerPanel(open) {
+  document.getElementById("customerPanel").classList.toggle("open", open);
+  document.getElementById("overlay").classList.toggle("open", open);
+}
+
+function updateCustomerSummary() {
+  const name = document.getElementById("custName").value.trim();
+  const project = document.getElementById("custProject").value.trim();
+  const txt = name ? `${name} ${project ? ' (' + project + ')' : ''}` : "Henüz müşteri bilgisi girilmedi (Opsiyonel)";
+  document.getElementById("customerSummaryText").textContent = txt;
+}
+
 function preparePrintAndPrint() {
-  calculate();
+  calculateAndRender();
   window.print();
 }
 
@@ -543,12 +703,8 @@ function savePrices() {
   localStorage.setItem("acanlar_prices", JSON.stringify(prices));
   localStorage.setItem("acanlar_settings", JSON.stringify(settings));
 
-  document.querySelectorAll(".material").forEach(s => {
-    const current = s.value;
-    s.innerHTML = Object.keys(prices).map(p => `<option value="${p}" ${p === current ? "selected" : ""}>${p}</option>`).join("");
-  });
-
-  calculate();
+  renderActiveForm();
+  calculateAndRender();
   toggleSettings(false);
 }
 
@@ -558,7 +714,8 @@ function resetPrices() {
   localStorage.setItem("acanlar_prices", JSON.stringify(prices));
   localStorage.setItem("acanlar_settings", JSON.stringify(settings));
   renderPriceSettings();
-  calculate();
+  renderActiveForm();
+  calculateAndRender();
 }
 
 function toggleSettings(force) {
@@ -570,19 +727,20 @@ function toggleSettings(force) {
 
 function newQuote() {
   if (!confirm("Tüm kalemler ve müşteri bilgileri sıfırlanacak. Devam edilsin mi?")) return;
-  document.getElementById("items").innerHTML = "";
+  itemsList = [];
   document.getElementById("custName").value = "";
   document.getElementById("custPhone").value = "";
   document.getElementById("custProject").value = "";
   document.getElementById("custNotes").value = "";
   updateCustomerSummary();
-  itemCount = 0;
-  addItem();
+  renderActiveForm();
+  calculateAndRender();
 }
 
 // İLK AÇILIŞ
 renderPriceSettings();
-addItem();
+renderActiveForm();
+calculateAndRender();
 </script>
 
 </body>
