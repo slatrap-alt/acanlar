@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>ACANLAR MOBİLYA DEKORASYON - Fiyat Teklif Programı</title>
+<title>ACANLAR MOBİLYA DEKORASYON - Fiyat Teklif Programı v1.4</title>
 <style>
 :root {
   --red: #b90000;
@@ -47,14 +47,17 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
 .item-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px dashed #e2e8f0; }
 .item-no { font-weight: 800; font-size: 14px; color: var(--red); display: flex; align-items: center; gap: 6px; }
 
-/* DONANIM KARTLARI */
+/* DONANIM & TEZGAH KARTLARI */
 .feature-group { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: #f8fafc; padding: 10px; border-radius: 10px; border: 1px solid #e2e8f0; }
-
-/* COUNTER */
 .counter-box { display: flex; align-items: center; gap: 4px; margin-top: 2px; }
 .btn-counter { width: 34px; height: 34px; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; font-size: 16px; font-weight: 800; color: var(--dark); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; user-select: none; }
 .btn-counter:active { background: #e2e8f0; transform: scale(0.96); }
 .counter-val { flex: 1; text-align: center; font-size: 14px; font-weight: 800; border: 1px solid #cbd5e1; border-radius: 6px; padding: 6px 0; background: #fff; }
+
+/* CHECKBOX & DİZAYN */
+.toggle-box { grid-column: 1 / -1; background: #f1f5f9; padding: 10px; border-radius: 10px; border: 1px solid #cbd5e1; display: flex; flex-direction: column; gap: 8px; }
+.toggle-head { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 13px; color: var(--dark); cursor: pointer; user-select: none; }
+.toggle-head input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--red); cursor: pointer; }
 
 /* CANLI ÖNİZLEME KART TASARIMI */
 .live-preview-box { background: linear-gradient(135deg, #0f172a, #1e293b); color: #fff; padding: 12px 16px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
@@ -78,7 +81,7 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
 .overlay.open { opacity: 1; pointer-events: auto; }
 
 /* ÖZET TABLOSU */
-.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
 .summary-card { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
 .summary-card label { font-size: 10px; color: var(--muted); font-weight: 700; text-transform: uppercase; }
 .summary-card .val { font-size: 14px; font-weight: 800; color: var(--dark); margin-top: 2px; }
@@ -93,13 +96,31 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
 
 /* AYARLAR FAB */
 .settings-fab { position: fixed; right: 12px; top: 12px; z-index: 1000; width: 38px; height: 38px; border: 0; border-radius: 50%; background: #fff; color: #1e293b; box-shadow: 0 4px 14px #0003; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; }
-.settings-drawer { position: fixed; right: 12px; top: 58px; width: min(340px, calc(100vw - 24px)); max-height: calc(100vh - 80px); background: #fff; border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 16px 48px #0003; z-index: 1000; transform: translateX(calc(100% + 30px)); opacity: 0; pointer-events: none; transition: .25s ease; overflow: auto; }
+.settings-drawer { position: fixed; right: 12px; top: 58px; width: min(360px, calc(100vw - 24px)); max-height: calc(100vh - 80px); background: #fff; border: 1px solid var(--border); border-radius: 14px; box-shadow: 0 16px 48px #0003; z-index: 1000; transform: translateX(calc(100% + 30px)); opacity: 0; pointer-events: none; transition: .25s ease; overflow: auto; }
 .settings-drawer.open { transform: translateX(0); opacity: 1; pointer-events: auto; }
 .drawer-head { padding: 14px; border-bottom: 1px solid var(--border); }
 .drawer-head > div:first-child { display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 800; }
 .drawer-close { border: 0; background: #f1f5f9; border-radius: 6px; width: 28px; height: 28px; font-size: 18px; cursor: pointer; }
-.drawer-body { padding: 14px; }
+.drawer-body { padding: 14px; display: flex; flex-direction: column; gap: 14px; }
+
+/* 🎨 ÖZEL RENKLİ FİYAT GRUP KARTLARI */
+.price-group-card { border-radius: 10px; padding: 12px; border: 1px solid var(--border); }
+.price-group-card.cabinet { background: #eff6ff; border-color: #bfdbfe; border-left: 4px solid #2563eb; }
+.price-group-card.countertop { background: #f0fdf4; border-color: #bbf7d0; border-left: 4px solid #16a34a; }
+.price-group-card.extras { background: #f8fafc; border-color: #e2e8f0; border-left: 4px solid #475569; }
+
+.price-group-title { font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+.price-group-title.cabinet { color: #1e40af; }
+.price-group-title.countertop { color: #166534; }
+.price-group-title.extras { color: #1e293b; }
+
+.price-tag { font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: 700; text-transform: none; }
+.price-tag.blue { background: #dbeafe; color: #1e40af; }
+.price-tag.green { background: #dcfce7; color: #15803d; }
+.price-tag.gray { background: #e2e8f0; color: #334155; }
+
 .price-row { display: grid; grid-template-columns: 1fr 110px; gap: 8px; align-items: center; margin-bottom: 8px; font-size: 12px; font-weight: 600; }
+.price-row:last-child { margin-bottom: 0; }
 
 /* 🖨️ YAZDIRMA ALANI VE A4 DÜZENİ */
 .quote-print-form {
@@ -174,7 +195,7 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
       <img src="logo.jpg" class="logo-img" alt="ACANLAR MOBİLYA">
     </div>
     <div class="brand">
-      <h1>ACANLAR MOBİLYA DEKORASYON <span class="version-badge">v1.1</span></h1>
+      <h1>ACANLAR MOBİLYA DEKORASYON <span class="version-badge">v1.4</span></h1>
       <p>Fiyat Teklif & Hesaplama Programı</p>
     </div>
   </div>
@@ -237,8 +258,12 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
         <div class="val" id="totalArea">0,00 m² / mt</div>
       </div>
       <div class="summary-card">
-        <label>Malzeme Tutarı</label>
+        <label>Dolap Malzemesi</label>
         <div class="val" id="totalMaterial">0,00 TL</div>
+      </div>
+      <div class="summary-card">
+        <label>Tezgah Tutarı</label>
+        <div class="val" id="totalCountertop">0,00 TL</div>
       </div>
       <div class="summary-card">
         <label>Çekmeceler</label>
@@ -270,7 +295,7 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
 
   <!-- PROGRAM ALTI FOOTER -->
   <footer class="app-footer no-print">
-    Acanlar Mobilya Fiyat Hesaplama Programı / <strong>Mesut ACAN</strong> • <span style="color:var(--red);">v1.1</span>
+    Acanlar Mobilya Fiyat Hesaplama Programı / <strong>Mesut ACAN</strong> • <span style="color:var(--red);">v1.4</span>
   </footer>
 
   <!-- 4. A4 YAZDIRILABİLİR MÜŞTERİ TEKLİF FORMU -->
@@ -308,7 +333,7 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
           <th style="width:15%">Malzeme</th>
           <th style="width:18%">Ölçü / Uzunluk</th>
           <th style="width:7%">Adet</th>
-          <th style="width:15%">Ekstra Özellikler</th>
+          <th style="width:15%">Ekstra Özellikler / Tezgah</th>
           <th style="width:15%;text-align:right">Tutar</th>
         </tr>
       </thead>
@@ -329,7 +354,8 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
       </div>
       <div class="pf-totals">
         <div class="pf-totals-row"><span>Toplam İmalat / Metraj:</span><span id="pfArea">0 m²</span></div>
-        <div class="pf-totals-row"><span>Net Malzeme Tutar:</span><span id="pfMatTotal">0 TL</span></div>
+        <div class="pf-totals-row"><span>Dolap & Malzeme Tutarı:</span><span id="pfMatTotal">0 TL</span></div>
+        <div class="pf-totals-row"><span>Tezgah Tutarı:</span><span id="pfCountertopTotal">0 TL</span></div>
         <div class="pf-totals-row"><span>Donanım Ekstraları:</span><span id="pfExtraTotal">0 TL</span></div>
         <div class="pf-totals-row grand"><span>GENEL TOPLAM:</span><span id="pfGrandTotal">0 TL</span></div>
       </div>
@@ -365,18 +391,40 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
 <div id="settingsDrawer" class="settings-drawer no-print">
   <div class="drawer-head">
     <div><strong>⚙️ Birim Fiyat Ayarları</strong><button class="drawer-close" onclick="toggleSettings()">×</button></div>
-    <div style="font-size:11px; color:var(--muted); margin-top:2px;">m² Fiyatları ve Donanım Bedelleri</div>
+    <div style="font-size:11px; color:var(--muted); margin-top:2px;">Sistem Birim Fiyat Yönetimi</div>
   </div>
   <div class="drawer-body">
-    <h4 style="margin:0 0 8px 0; color:var(--dark); font-size:13px;">Malzeme m² Fiyatları</h4>
-    <div id="priceSettings"></div>
+    
+    <!-- 1. DOLAP MALZEME FİYATLARI KARTI -->
+    <div class="price-group-card cabinet">
+      <div class="price-group-title cabinet">
+        <span>🚪 Dolap Malzemesi</span>
+        <span class="price-tag blue">m² Fiyatı</span>
+      </div>
+      <div id="priceSettings"></div>
+    </div>
 
-    <h4 style="margin:12px 0 8px 0; color:var(--dark); font-size:13px;">Donanım Ekstra Fiyatları</h4>
-    <div class="price-row"><strong>Çekmece (Adet)</strong><input id="drawerPrice" type="number" min="0" value="2000"></div>
-    <div class="price-row"><strong>Sürgü Kapak (Modül/Adet)</strong><input id="slidingPrice" type="number" min="0" value="7500"></div>
-    <div class="price-row"><strong>Cam / Ayna Kapak (Adet)</strong><input id="glassPrice" type="number" min="0" value="1500"></div>
+    <!-- 2. TEZGAH FİYATLARI KARTI -->
+    <div class="price-group-card countertop">
+      <div class="price-group-title countertop">
+        <span>🍳 Mutfak Tezgahı</span>
+        <span class="price-tag green">Metre Tül (mt)</span>
+      </div>
+      <div id="countertopPriceSettings"></div>
+    </div>
 
-    <div class="actions" style="margin-top:14px;">
+    <!-- 3. DONANIM EKSTRA FİYATLARI KARTI -->
+    <div class="price-group-card extras">
+      <div class="price-group-title extras">
+        <span>🗄️ Donanım Ekstraları</span>
+        <span class="price-tag gray">Adet Başına</span>
+      </div>
+      <div class="price-row"><strong>Çekmece Bedeli</strong><input id="drawerPrice" type="number" min="0" value="2000"></div>
+      <div class="price-row"><strong>Sürgü Kapak Bedeli</strong><input id="slidingPrice" type="number" min="0" value="7500"></div>
+      <div class="price-row"><strong>Cam / Ayna Kapak</strong><input id="glassPrice" type="number" min="0" value="1500"></div>
+    </div>
+
+    <div class="actions">
       <button class="btn btn-dark" style="width:100%;" onclick="savePrices()">💾 Fiyatları Kaydet</button>
       <button class="btn btn-light" style="width:100%;" onclick="resetPrices()">Varsayılana Dön</button>
     </div>
@@ -384,6 +432,7 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
 </div>
 
 <script>
+// VARSAYILAN BİRİM FİYATLAR
 const DEFAULT_PRICES = {
   "Suntalam": 8000,
   "MDF": 9000,
@@ -391,10 +440,21 @@ const DEFAULT_PRICES = {
   "Akrilik": 11000,
   "Alüminyum": 12000
 };
+
+const DEFAULT_COUNTERTOPS = {
+  "Mermerit": 5500,
+  "Granit": 6500,
+  "Quars": 9000,
+  "Porselen": 10000
+};
+
 const DEFAULT_SETTINGS = { drawerPrice: 2000, slidingPrice: 7500, glassPrice: 1500 };
 
-let prices = JSON.parse(localStorage.getItem("acanlar_prices") || "null") || {...DEFAULT_PRICES};
-let settings = JSON.parse(localStorage.getItem("acanlar_settings") || "null") || {...DEFAULT_SETTINGS};
+// TARAYICI HAFIZASINDAN (LOCALSTORAGE) YÜKLEME
+let prices = JSON.parse(localStorage.getItem("acanlar_prices_v1_3") || "null") || {...DEFAULT_PRICES};
+let countertops = JSON.parse(localStorage.getItem("acanlar_countertops_v1_3") || "null") || {...DEFAULT_COUNTERTOPS};
+let settings = JSON.parse(localStorage.getItem("acanlar_settings_v1_3") || "null") || {...DEFAULT_SETTINGS};
+
 let itemsList = []; 
 let currentTab = "wardrobe"; 
 
@@ -402,7 +462,6 @@ function money(n) {
   return new Intl.NumberFormat("tr-TR", { style: "currency", currency: "TRY", maximumFractionDigits: 0 }).format(n || 0);
 }
 
-// SEKME DEĞİŞTİRME FONKSİYONU
 function switchTab(type) {
   currentTab = type;
   document.getElementById("tab-wardrobe").classList.toggle("active", type === "wardrobe");
@@ -410,18 +469,39 @@ function switchTab(type) {
   renderActiveForm();
 }
 
-// ANLIK VERİ GİRİŞ FORMUNU OLUŞTURUR
+function toggleCountertopOption(checked) {
+  const box = document.getElementById("countertopSelectBox");
+  if (box) box.style.display = checked ? "block" : "none";
+  calcLivePreview();
+}
+
 function renderActiveForm() {
   const container = document.getElementById("activeFormBox");
   const options = Object.keys(prices).map(p => `<option value="${p}">${p}</option>`).join("");
+  const countertopOptions = Object.keys(countertops).map(c => `<option value="${c}">${c} (${money(countertops[c])}/mt)</option>`).join("");
 
   if (currentTab === "kitchen") {
     container.innerHTML = `
       <div class="fields">
         <div class="field"><label>Mutfak Modül Tanımı</label><input id="inp_name" placeholder="Örn: Mutfak Dolabı, Ada Mutfak" value="Mutfak Dolabı" oninput="calcLivePreview()"></div>
-        <div class="field"><label>Malzeme Türü</label><select id="inp_material" onchange="calcLivePreview()">${options}</select></div>
+        <div class="field"><label>Dolap Malzeme Türü</label><select id="inp_material" onchange="calcLivePreview()">${options}</select></div>
         <div class="field"><label>Alt Tezgah (cm)</label><input id="inp_lower" type="number" min="0" placeholder="Örn: 350" oninput="calcLivePreview()"></div>
         <div class="field"><label>Üst Tezgah (cm)</label><input id="inp_upper" type="number" min="0" placeholder="Örn: 320" oninput="calcLivePreview()"></div>
+
+        <!-- TEZGAH HESAPLAMA SÜRGÜLÜ TİK KUTUSU -->
+        <div class="toggle-box">
+          <label class="toggle-head">
+            <input type="checkbox" id="chk_countertop" onchange="toggleCountertopOption(this.checked)">
+            <span>➕ Tezgah Fiyatı Hesapla & Ekle</span>
+          </label>
+
+          <div id="countertopSelectBox" style="display:none; margin-top:4px;">
+            <label style="font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; display:block; margin-bottom:4px;">Tezgah Malzeme / Tür Seçimi (Alt Tezgah Ölçüsü Baz Alınır)</label>
+            <select id="inp_countertop_type" onchange="calcLivePreview()">
+              ${countertopOptions}
+            </select>
+          </div>
+        </div>
       </div>
     `;
   } else {
@@ -491,8 +571,23 @@ function calcLivePreview() {
     const lowerCm = parseFloat(document.getElementById("inp_lower")?.value) || 0;
     const upperCm = parseFloat(document.getElementById("inp_upper")?.value) || 0;
     const totalM = (lowerCm + upperCm) / 100;
-    total = totalM * unitPrice;
-    if (totalM > 0) text = `Toplam Metraj: ${totalM.toFixed(2)} mt (${unitPrice.toLocaleString('tr-TR')} TL/m²)`;
+    let cabinetSubtotal = totalM * unitPrice;
+    
+    let countertopSubtotal = 0;
+    let countertopText = "";
+    const isCountertopActive = document.getElementById("chk_countertop")?.checked;
+    
+    if (isCountertopActive && lowerCm > 0) {
+      const cType = document.getElementById("inp_countertop_type")?.value || "Granit";
+      const cPrice = countertops[cType] || 0;
+      countertopSubtotal = (lowerCm / 100) * cPrice;
+      countertopText = ` + Tezgah (${cType}: ${money(countertopSubtotal)})`;
+    }
+
+    total = cabinetSubtotal + countertopSubtotal;
+    if (totalM > 0 || countertopSubtotal > 0) {
+      text = `Metraj: ${totalM.toFixed(2)} mt (${money(cabinetSubtotal)})${countertopText}`;
+    }
   } else {
     const w = parseFloat(document.getElementById("inp_width")?.value) || 0;
     const h = parseFloat(document.getElementById("inp_height")?.value) || 0;
@@ -508,7 +603,7 @@ function calcLivePreview() {
     const slidingSubtotal = sliding * (settings.slidingPrice || 0);
 
     total = matSubtotal + drawerSubtotal + glassSubtotal + slidingSubtotal;
-    if (area > 0) text = `Alan: ${area.toFixed(2)} m² | Ekstralar Dahil`;
+    if (area > 0) text = `Alan: ${area.toFixed(2)} m² | Donanım Dahil`;
   }
 
   document.getElementById("liveMetrajText").textContent = text;
@@ -532,12 +627,20 @@ function addCurrentItemToList() {
     const upperCm = parseFloat(document.getElementById("inp_upper").value) || 0;
 
     if (lowerCm <= 0 && upperCm <= 0) {
-      alert("Lütfen en az bir tezgah uzunluğu (cm) giriniz.");
+      alert("Lütfen en az bir tezgah/dolap uzunluğu (cm) giriniz.");
       return;
     }
 
     item.lowerCm = lowerCm;
     item.upperCm = upperCm;
+
+    const isCountertop = document.getElementById("chk_countertop")?.checked;
+    if (isCountertop && lowerCm > 0) {
+      item.hasCountertop = true;
+      item.countertopType = document.getElementById("inp_countertop_type").value;
+    } else {
+      item.hasCountertop = false;
+    }
   } else {
     const w = parseFloat(document.getElementById("inp_width").value) || 0;
     const h = parseFloat(document.getElementById("inp_height").value) || 0;
@@ -571,7 +674,7 @@ function calculateAndRender() {
   const listContainer = document.getElementById("itemsList");
   listContainer.innerHTML = "";
 
-  let areaSum = 0, materialTotalSum = 0, drawerTotalSum = 0, slidingTotalSum = 0, glassTotalSum = 0;
+  let areaSum = 0, materialTotalSum = 0, countertopTotalSum = 0, drawerTotalSum = 0, slidingTotalSum = 0, glassTotalSum = 0;
   const printItems = [];
 
   if (itemsList.length === 0) {
@@ -579,7 +682,7 @@ function calculateAndRender() {
   }
 
   itemsList.forEach((x, idx) => {
-    let itemArea = 0, matSubtotal = 0, drawerSubtotal = 0, glassSubtotal = 0, slidingSubtotal = 0;
+    let itemArea = 0, matSubtotal = 0, countertopSubtotal = 0, drawerSubtotal = 0, glassSubtotal = 0, slidingSubtotal = 0;
     let dimensionText = "", qtyText = "";
 
     if (x.type === "kitchen") {
@@ -587,6 +690,10 @@ function calculateAndRender() {
       const upperM = x.upperCm / 100;
       itemArea = lowerM + upperM; 
       matSubtotal = itemArea * (prices[x.material] || 0);
+
+      if (x.hasCountertop) {
+        countertopSubtotal = lowerM * (countertops[x.countertopType] || 0);
+      }
 
       dimensionText = `Alt: ${x.lowerCm} cm / Üst: ${x.upperCm} cm`;
       qtyText = `${itemArea.toFixed(2)} mt`;
@@ -601,15 +708,17 @@ function calculateAndRender() {
       qtyText = `${x.qty} ad.`;
     }
 
-    const finalItemTotal = matSubtotal + drawerSubtotal + glassSubtotal + slidingSubtotal;
+    const finalItemTotal = matSubtotal + countertopSubtotal + drawerSubtotal + glassSubtotal + slidingSubtotal;
 
     areaSum += itemArea;
     materialTotalSum += matSubtotal;
+    countertopTotalSum += countertopSubtotal;
     drawerTotalSum += drawerSubtotal;
     glassTotalSum += glassSubtotal;
     slidingTotalSum += slidingSubtotal;
 
     let extrasInfo = [];
+    if (x.hasCountertop) extrasInfo.push(`Tezgah: ${x.countertopType} (${money(countertopSubtotal)})`);
     if (x.drawers > 0) extrasInfo.push(`${x.drawers} Çekmece`);
     if (x.glass > 0) extrasInfo.push(`${x.glass} Cam/Ayna`);
     if (x.sliding > 0) extrasInfo.push(`${x.sliding} Sürgü Kapak`);
@@ -623,7 +732,7 @@ function calculateAndRender() {
       </div>
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; font-size:13px;">
         <div><strong>Malzeme:</strong> ${x.material} | <strong>Ölçü:</strong> ${dimensionText} (${qtyText})</div>
-        ${extrasInfo.length > 0 ? `<div style="color:var(--muted)"><strong>Donanım:</strong> ${extrasInfo.join(", ")}</div>` : ''}
+        ${extrasInfo.length > 0 ? `<div style="color:#b90000; font-weight:700;">${extrasInfo.join(" • ")}</div>` : ''}
         <div style="font-weight:800; color:var(--red); font-size:15px;">${money(finalItemTotal)}</div>
       </div>
     `;
@@ -635,6 +744,7 @@ function calculateAndRender() {
       mat: x.material,
       dimensionText,
       qtyText,
+      countertopInfo: x.hasCountertop ? `${x.countertopType} Tezgah` : "",
       drawers: x.drawers || 0,
       glass: x.glass || 0,
       sliding: x.sliding || 0,
@@ -642,22 +752,24 @@ function calculateAndRender() {
     });
   });
 
-  const grandTotal = materialTotalSum + drawerTotalSum + slidingTotalSum + glassTotalSum;
+  const grandTotal = materialTotalSum + countertopTotalSum + drawerTotalSum + slidingTotalSum + glassTotalSum;
 
   document.getElementById("totalArea").textContent = areaSum.toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " m² / mt";
   document.getElementById("totalMaterial").textContent = money(materialTotalSum);
+  document.getElementById("totalCountertop").textContent = money(countertopTotalSum);
   document.getElementById("totalDrawers").textContent = money(drawerTotalSum);
   document.getElementById("totalSliding").textContent = money(slidingTotalSum);
   document.getElementById("totalGlass").textContent = money(glassTotalSum);
   document.getElementById("grandTotal").textContent = money(grandTotal);
 
-  updatePrintTable(printItems, areaSum, materialTotalSum, (drawerTotalSum + slidingTotalSum + glassTotalSum), grandTotal);
+  updatePrintTable(printItems, areaSum, materialTotalSum, countertopTotalSum, (drawerTotalSum + slidingTotalSum + glassTotalSum), grandTotal);
 }
 
-function updatePrintTable(items, area, matTotal, extraTotal, grandTotal) {
+function updatePrintTable(items, area, matTotal, countertopTotal, extraTotal, grandTotal) {
   const tbody = document.getElementById("pfTableBody");
   tbody.innerHTML = items.map(x => {
     let extras = [];
+    if (x.countertopInfo) extras.push(x.countertopInfo);
     if (x.drawers > 0) extras.push(`${x.drawers} Çekmece`);
     if (x.glass > 0) extras.push(`${x.glass} Cam/Ayna`);
     if (x.sliding > 0) extras.push(`${x.sliding} Sürgü Kapak`);
@@ -676,6 +788,7 @@ function updatePrintTable(items, area, matTotal, extraTotal, grandTotal) {
 
   document.getElementById("pfArea").textContent = area.toFixed(2) + " m² / mt";
   document.getElementById("pfMatTotal").textContent = money(matTotal);
+  document.getElementById("pfCountertopTotal").textContent = money(countertopTotal);
   document.getElementById("pfExtraTotal").textContent = money(extraTotal);
   document.getElementById("pfGrandTotal").textContent = money(grandTotal);
 
@@ -708,31 +821,45 @@ function preparePrintAndPrint() {
 
 function renderPriceSettings() {
   document.getElementById("priceSettings").innerHTML = Object.keys(prices).map(k => `
-    <div class="price-row"><strong>${k} (m²)</strong><input type="number" min="0" value="${prices[k]}" data-price="${k}"></div>`).join("");
+    <div class="price-row"><strong>${k}</strong><input type="number" min="0" value="${prices[k]}" data-price="${k}"></div>`).join("");
+
+  document.getElementById("countertopPriceSettings").innerHTML = Object.keys(countertops).map(k => `
+    <div class="price-row"><strong>${k}</strong><input type="number" min="0" value="${countertops[k]}" data-countertop="${k}"></div>`).join("");
+
   document.getElementById("drawerPrice").value = settings.drawerPrice;
   document.getElementById("slidingPrice").value = settings.slidingPrice;
   document.getElementById("glassPrice").value = settings.glassPrice || 1500;
 }
 
+// FİYATLARI LOCALSTORAGE'A KAYDETME
 function savePrices() {
   document.querySelectorAll("[data-price]").forEach(i => prices[i.dataset.price] = parseFloat(i.value) || 0);
+  document.querySelectorAll("[data-countertop]").forEach(i => countertops[i.dataset.countertop] = parseFloat(i.value) || 0);
+
   settings.drawerPrice = parseFloat(document.getElementById("drawerPrice").value) || 0;
   settings.slidingPrice = parseFloat(document.getElementById("slidingPrice").value) || 0;
   settings.glassPrice = parseFloat(document.getElementById("glassPrice").value) || 0;
 
-  localStorage.setItem("acanlar_prices", JSON.stringify(prices));
-  localStorage.setItem("acanlar_settings", JSON.stringify(settings));
+  localStorage.setItem("acanlar_prices_v1_3", JSON.stringify(prices));
+  localStorage.setItem("acanlar_countertops_v1_3", JSON.stringify(countertops));
+  localStorage.setItem("acanlar_settings_v1_3", JSON.stringify(settings));
 
   renderActiveForm();
   calculateAndRender();
   toggleSettings(false);
+  alert("Fiyatlar tarayıcınıza başarıyla kaydedildi!");
 }
 
 function resetPrices() {
+  if (!confirm("Fiyatlar varsayılan değerlere döndürülecek. Onaylıyor musunuz?")) return;
   prices = { ...DEFAULT_PRICES };
+  countertops = { ...DEFAULT_COUNTERTOPS };
   settings = { ...DEFAULT_SETTINGS };
-  localStorage.setItem("acanlar_prices", JSON.stringify(prices));
-  localStorage.setItem("acanlar_settings", JSON.stringify(settings));
+
+  localStorage.setItem("acanlar_prices_v1_3", JSON.stringify(prices));
+  localStorage.setItem("acanlar_countertops_v1_3", JSON.stringify(countertops));
+  localStorage.setItem("acanlar_settings_v1_3", JSON.stringify(settings));
+
   renderPriceSettings();
   renderActiveForm();
   calculateAndRender();
