@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>ACANLAR MOBİLYA DEKORASYON - Fiyat Teklif Programı v1.7</title>
+<title>ACANLAR MOBİLYA DEKORASYON - Fiyat Teklif Programı v1.8</title>
 <!-- OKUNAKLI WEBFONT ENTEGRASYONU -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -106,6 +106,17 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
 /* PROGRAM FOOTER */
 .app-footer { text-align: center; padding: 16px 10px; font-size: 12px; color: #64748b; font-weight: 600; border-top: 1px solid #cbd5e1; margin-top: 10px; }
 .app-footer strong { color: var(--dark); font-weight: 700; }
+
+/* 🌐 ACANLAR PORTAL DROPDOWN MENÜSÜ (DİKKAT ÇEKMEYEN ŞIK TASARIM) */
+.portal-dropdown-wrapper { position: fixed; right: 58px; top: 12px; z-index: 1000; }
+.portal-btn { height: 38px; padding: 0 12px; border: 1px solid var(--border); border-radius: 20px; background: #fff; color: #334155; font-size: 12px; font-weight: 700; box-shadow: 0 4px 14px #0001; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: 0.2s; }
+.portal-btn:hover { background: #f8fafc; border-color: #94a3b8; }
+.portal-menu { position: absolute; right: 0; top: 46px; width: 250px; background: #fff; border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 10px 30px #0002; display: none; flex-direction: column; overflow: hidden; z-index: 1001; }
+.portal-menu.open { display: flex; }
+.portal-menu-header { padding: 10px 12px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.portal-item { padding: 10px 12px; color: var(--dark); font-size: 12px; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #f1f5f9; transition: 0.15s; }
+.portal-item:last-child { border-bottom: none; }
+.portal-item:hover { background: #eff6ff; color: var(--red); }
 
 /* AYARLAR FAB */
 .settings-fab { position: fixed; right: 12px; top: 12px; z-index: 1000; width: 38px; height: 38px; border: 0; border-radius: 50%; background: #fff; color: #1e293b; box-shadow: 0 4px 14px #0003; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; }
@@ -224,7 +235,7 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
       <img src="logo.jpg" class="logo-img" alt="ACANLAR MOBİLYA">
     </div>
     <div class="brand">
-      <h1>ACANLAR MOBİLYA DEKORASYON <span class="version-badge">v1.7</span></h1>
+      <h1>ACANLAR MOBİLYA DEKORASYON <span class="version-badge">v1.8</span></h1>
       <p>Fiyat Teklif & Hesaplama Programı</p>
     </div>
   </div>
@@ -324,10 +335,27 @@ input:focus, select:focus { border-color: var(--red); box-shadow: 0 0 0 3px #b90
 
   <!-- PROGRAM ALTI FOOTER -->
   <footer class="app-footer no-print">
-    Acanlar Mobilya Fiyat Hesaplama Programı / <strong>Mesut ACAN</strong> • <span style="color:var(--red);">v1.7</span>
+    Acanlar Mobilya Fiyat Hesaplama Programı / <strong>Mesut ACAN</strong> • <span style="color:var(--red);">v1.8</span>
   </footer>
 
 </main>
+
+<!-- 🌐 ACANLAR PORTAL DROPDOWN BUTONU VE MENÜSÜ -->
+<div class="portal-dropdown-wrapper no-print">
+  <button class="portal-btn" onclick="togglePortalMenu()">
+    <span>🌐 Acanlar Portal</span>
+    <small style="font-size:9px;">▼</small>
+  </button>
+  <div class="portal-menu" id="portalMenu">
+    <div class="portal-menu-header">Hızlı Erişim Araçları</div>
+    <a href="https://slatrap-alt.github.io/610/" target="_blank" class="portal-item">
+      <span>✂️</span> Acanlar Kesim Optimizasyon
+    </a>
+    <a href="https://slatrap-alt.github.io/index.html" target="_blank" class="portal-item">
+      <span>✏️</span> Acanlar Çizim Programı
+    </a>
+  </div>
+</div>
 
 <!-- 4. PWA / IPHONE UYUMLU TAM EKRAN YAZDIRMA ÖNİZLEME PENCERESİ (MODAL) -->
 <div class="print-modal" id="printModal">
@@ -500,6 +528,20 @@ let currentTab = "wardrobe";
 function money(n) {
   return new Intl.NumberFormat("tr-TR", { style: "currency", currency: "TRY", maximumFractionDigits: 0 }).format(n || 0);
 }
+
+/* 🌐 PORTAL MENÜSÜ KONTROLÜ */
+function togglePortalMenu() {
+  const menu = document.getElementById("portalMenu");
+  menu.classList.toggle("open");
+}
+
+// Dışarı tıklayınca portal menüsünü kapat
+document.addEventListener("click", function(e) {
+  const wrapper = document.querySelector(".portal-dropdown-wrapper");
+  if (wrapper && !wrapper.contains(e.target)) {
+    document.getElementById("portalMenu")?.classList.remove("open");
+  }
+});
 
 function switchTab(type) {
   currentTab = type;
